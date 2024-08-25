@@ -7,9 +7,9 @@
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
-	<h1>Mes livraisons à venir</h1>
+	<h1>Mes livraisons ï¿½ venir</h1>
 	<c:choose>
-	    <c:when test="${ empty upcomingDeliveries }">Aucune livraison à venir</c:when>
+	    <c:when test="${ empty upcomingDeliveries }">Aucune livraison ï¿½ venir</c:when>
 	    <c:otherwise>
 	    	<table>
 				<thead>
@@ -48,7 +48,7 @@
 							    		<input type="submit" value="Refuser">
 							    	</form>
 						    	</c:if>
-						    	<c:if test="${ delivery.status == 'Acceptée' }">
+						    	<c:if test="${ delivery.status == 'Acceptï¿½e' }">
 							    	<form method="post" action="livraison">
 							    		<input type="hidden" name="id" value="${ delivery.id }" />
 							    		<input type="hidden" name="action" value="BILL" />
@@ -65,9 +65,9 @@
 	    </c:otherwise>
 	</c:choose>
 	
-	<h1>Mes livraisons passées</h1>
+	<h1>Mes livraisons passï¿½es</h1>
 	<c:choose>
-	    <c:when test="${ empty pastDeliveries }">Aucune livraison terminée</c:when>
+	    <c:when test="${ empty pastDeliveries }">Aucune livraison terminï¿½e</c:when>
 	    <c:otherwise>
 	    	<table>
 				<thead>

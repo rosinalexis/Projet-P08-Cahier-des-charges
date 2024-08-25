@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: livrai-web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=livrai
+      - MYSQL_USER=livraiuser
+      - MYSQL_PASSWORD=livraipassword
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    container_name: livrai-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: livrai
+      MYSQL_USER: livraiuser
+      MYSQL_PASSWORD: livraipassword
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: livrai-phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge

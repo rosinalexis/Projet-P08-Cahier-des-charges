@@ -30,7 +30,10 @@ public class AbstractDao {
         }
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/livrai", "root", "password");
+            String url = "jdbc:mysql://db:3306/livrai";  // "db" est le nom du service MySQL défini dans docker-compose.yml
+            String username = "livraiuser";
+            String password = "livraipassword";
+            connection = DriverManager.getConnection( url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
